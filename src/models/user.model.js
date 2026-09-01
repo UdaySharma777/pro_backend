@@ -22,7 +22,6 @@ const userSchema = new Schema(
         fullname : {
             type: String,
             required: true,
-            unique: true,
             trim: true,
             index: true
         },
@@ -40,9 +39,6 @@ const userSchema = new Schema(
         password : {
             type: String,
             required: [true, 'Password is required'],
-            unique: true,
-            trim: true,
-            index: true
         },
         refreshToken: {
             type: String
@@ -90,6 +86,5 @@ userSchema.methods.generateRefreshToken = function(){
     )
 }
 
-userSchema.methods.generateRefreshToken = function(){}
 
 export const User = mongoose.model("User",userSchema)

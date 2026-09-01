@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
 import mongooseAggregatePaginate from "mongoose-aggregate-paginate-v2";
 
-const vedioSchema =  new mongoose.Schema(
+const videoSchema =  new mongoose.Schema(
     {
         videoFile: {
             type: String, // cloudinary url
@@ -42,6 +42,6 @@ const vedioSchema =  new mongoose.Schema(
 )
 
 
-videpSchema.plugin(mongooseAggregatePaginate)
+videoSchema.plugin(mongooseAggregatePaginate)
 
-export const Vedio = mongoose.model("Vedio", vedioSchema)
+export const Video = mongoose.model("Video", videoSchema)
