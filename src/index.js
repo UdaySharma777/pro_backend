@@ -1,6 +1,7 @@
 //require('dotenv').config({path: './env'})
 import dns from "dns"
 import dotenv from "dotenv"
+import {app} from './app.js'
 
 
 dotenv.config({
