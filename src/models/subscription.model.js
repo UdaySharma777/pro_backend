@@ -1,6 +1,6 @@
 import mongoose from "mongoose"
 
-const subscriptionSchema = new Schema(
+const subscriptionSchema = new mongoose.Schema(
     {
         subscriber: {
             type: mongoose.Schema.Types.ObjectId, //one who is subscribing
@@ -8,6 +8,7 @@ const subscriptionSchema = new Schema(
         },
         channel: {
             type: mongoose.Types.ObjectId, // one to whom subscriber is subscrbing
+            ref: "User"
         }
     },
     {
