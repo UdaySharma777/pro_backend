@@ -8,14 +8,15 @@ import { User } from "../models/user.model.js"
 const toggleVideoLike = asyncHandler(async (req, res) => {
     const {videoId} = req.params
     //TODO: toggle like on video
-    let isLiked = false
+    if (!videoId){
+        throw new ApiError(400, "Video not found")
+    }
     const like = await Like.findOne({
         user: req.user._id,
         video: videoId
     })
     if(like){
         await like.deleteOne()
-        isLiked = false
         return res.status(200).json(new ApiResponse(200, "Like Removed Successfully"))
     }
     else{
@@ -23,7 +24,6 @@ const toggleVideoLike = asyncHandler(async (req, res) => {
             video: videoId,
             user: req.user._id
         })
-        isLiked = true
         return res.status(200).json(new ApiResponse(200,"You Liked the Vedio"))
     }
 })
@@ -31,18 +31,18 @@ const toggleVideoLike = asyncHandler(async (req, res) => {
 const toggleCommentLike = asyncHandler(async (req, res) => {
     const {commentId} = req.params
     //TODO: toggle like on comment
-    let isLiked = false
+    if (!commentId){
+        throw new ApiError(400, "Comment not found")
+    }
     const like = await Like.findOne({
         user: req.user._id,
         comment: commentId
     })
     if(like){
         await like.deleteOne()
-        isLiked = false
         return res.status(200).json(new ApiResponse(200, "Comment like Removed"))
     }
     else{
-        isLiked = true
         await Like.create({
             comment: commentId,
             user: req.user._id
@@ -54,18 +54,18 @@ const toggleCommentLike = asyncHandler(async (req, res) => {
 const toggleTweetLike = asyncHandler(async (req, res) => {
     const {tweetId} = req.params
     //TODO: toggle like on tweet
-    let isLiked = false
+    if (!tweetId){
+        throw new ApiError(400, "Tweet not found")
+    }
     const like = await Like.findOne({
         user: req.user._id,
         tweet: tweetId
     })
     if(like){
         await like.deleteOne()
-        isLiked = false
         return res.status(200).json(new ApiResponse(200, "tweet Like removed"))
     }
     else{
-        isLiked = true
         await Like.create({
             tweet: tweetId,
             user: req.user._id

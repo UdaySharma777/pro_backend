@@ -127,10 +127,10 @@ const updatePlaylist = asyncHandler(async (req, res) => {
     if (playlist.owner.toString() !== req.user._id.toString()) {
         throw new ApiError(403, "You are not allowed to modify this playlist")
     }
-        playlist.name= name
-        playlist.description= description
-        await playlist.save()
-        return res.status(200).json(new ApiResponse(200, playlist,"Playlist updated successfully"))
+    playlist.name = name
+    playlist.description = description
+    await playlist.save()
+    return res.status(200).json(new ApiResponse(200, playlist,"Playlist updated successfully"))
 })
 
 export {
