@@ -4,9 +4,6 @@ import {upload} from "../middlewares/multer.middleware.js"
 import { verifyJWT } from "../middlewares/auth.middleware.js";
 
 const router = Router()
-
-router.use(verifyJWT)
-
 router.route("/register").post(
     upload.fields([
         {
@@ -24,11 +21,13 @@ router.route("/register").post(
 //router.prototype("/login").post(login)
 router.route("/login").post(loginUser)
 
-//secured routes
-router.route("/logout").post(verifyJWT, logoutUser)
+router.use(verifyJWT)
 
 //refresh
 router.route("/refresh-token").post(refreshAccessToken)
+
+//secured routes
+router.route("/logout").post(verifyJWT, logoutUser)
 
 //change Password
 router.route("/change-password").post(verifyJWT, changeCurrentPassword)
@@ -40,10 +39,10 @@ router.route("/current-user").get(verifyJWT, getCurrentUser)
 router.route("/update_account").patch(verifyJWT, updateAccountDetails)
 
 //avtar update
-router.route("/update-avatr").patch(verifyJWT, upload.single("avatar"), updateUserAvatar)
+router.route("/update-avatar").patch(verifyJWT, upload.single("avatar"), updateUserAvatar)
 
 //image update
-router.route("/image-update").patch(verifyJWT, upload.single("/coverImage"), updateUserCoverImage)
+router.route("/image-update").patch(verifyJWT, upload.single("coverImage"), updateUserCoverImage)
 
 //user profile
 router.route("/c/:username").get(verifyJWT, getUserChannelProfile)

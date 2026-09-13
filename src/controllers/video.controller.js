@@ -79,7 +79,7 @@ const publishAVideo = asyncHandler(async (req, res) => {
     if (!(title && description)){
         throw new ApiError(400, "both fields are required")
     }
-    const videoPath = req.files?.video[0]?.path
+    const videoPath = req.files?.videoFile[0]?.path
     if (!videoPath){
         throw new ApiError(400, "video file is required")
     }
@@ -101,7 +101,7 @@ const publishAVideo = asyncHandler(async (req, res) => {
 
     })
 
-    return res.status(200).json(200, publishedVideo,"Vedio published successfully")
+    return res.status(200).json(new ApiResponse(200, publishedVideo,"Vedio published successfully"))
 })
 
 const getVideoById = asyncHandler(async (req, res) => {
@@ -166,8 +166,8 @@ const deleteVideo = asyncHandler(async (req, res) => {
         throw new ApiError(403,"you are not allowed to delete this video")
     }
 
-    await Video.deleteOne()
-    return res.status(200).json(new ApiResponse(200, "video deleted successfully"))
+    await Video.findByIdAndDelete(videoId)
+    return res.status(200).json(new ApiResponse(200, {},"video deleted successfully"))
 })
 
 const togglePublishStatus = asyncHandler(async (req, res) => {

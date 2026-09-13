@@ -9,7 +9,7 @@ const commentSChema = new mongoose.Schema(
         },
         Video: {
             type: mongoose.Schema.Types.ObjectId,
-            ref: "Vedio"
+            ref: "Video"
         },
         owner: {
             type: mongoose.Schema.Types.ObjectId,

@@ -4,7 +4,7 @@ const likeSchema = new mongoose.Schema(
     {
         video: {
             type: mongoose.Schema.Types.ObjectId,
-            ref: "Vedio"
+            ref: "Video"
         },
         comment: {
             type: mongoose.Schema.Types.ObjectId,

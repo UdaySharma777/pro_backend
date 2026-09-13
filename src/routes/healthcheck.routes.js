@@ -1,6 +1,6 @@
-import { healthcheck } from "../controllers/healthcheck.controller";
+import { healthcheck } from "../controllers/healthcheck.controller.js";
 import { Router } from "express";
-import { verifyJWT } from "../middlewares/auth.middleware";
+import { verifyJWT } from "../middlewares/auth.middleware.js";
 
 const router = Router()
 router.use(verifyJWT)
